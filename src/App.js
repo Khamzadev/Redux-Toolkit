@@ -6,6 +6,14 @@ import {
   removeLastTodo,
 } from "./reduxToolkit/toolkitSlice";
 
+const addAsyncTodo = () => {
+  return async (dispatch) => {
+    setTimeout(() => {
+      dispatch(addTodo(prompt()));
+    }, 2000);
+  };
+};
+
 function App() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.toolkit.count);
@@ -38,6 +46,7 @@ function App() {
       <button onClick={() => dispatch(decrement())}>DECREMENT</button>
       <button onClick={() => dispatch(addTodo(prompt()))}>Добавить туду</button>
       <button onClick={() => dispatch(removeLastTodo())}>Удалить туду</button>
+      <button onClick={() => dispatch(addAsyncTodo())}>Добавить АСИНК ТУДУ</button>
       <div>
         {todos.map((todo) => (
           <p>{todo}</p>
